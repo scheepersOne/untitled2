@@ -20,6 +20,8 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   late int number;
   late String title;
   late String description;
+  late String length;
+  late String width;
 
   @override
   void initState() {
@@ -29,6 +31,8 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     number = widget.note?.number ?? 0;
     title = widget.note?.title ?? '';
     description = widget.note?.description ?? '';
+    length = widget.note?.length == null ? '' : '${widget.note?.length}';
+    width = widget.note?.width == null ? '' : '${widget.note?.width}';
   }
 
   @override
@@ -43,18 +47,22 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
             number: number,
             title: title,
             description: description,
+            length: length,
+            width: width,
             onChangedImportant: (isImportant) =>
                 setState(() => this.isImportant = isImportant),
             onChangedNumber: (number) => setState(() => this.number = number),
             onChangedTitle: (title) => setState(() => this.title = title),
             onChangedDescription: (description) =>
                 setState(() => this.description = description),
+            onChangedLength: (length) => setState(() =>  this.length = length),
+            onChangedWidth: (width) => setState(() => this.width = width),
           ),
         ),
       );
 
   Widget buildButton() {
-    final isFormValid = title.isNotEmpty && description.isNotEmpty;
+    final isFormValid = title.isNotEmpty && description.isNotEmpty && length.isNotEmpty && width.isNotEmpty;
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -91,6 +99,9 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       number: number,
       title: title,
       description: description,
+      length: double.parse(length),
+      width: double.parse(width),
+      result: double.parse(length) * double.parse(width),
     );
 
     await NotesDatabase.instance.update(note);
@@ -102,6 +113,9 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       isImportant: true,
       number: number,
       description: description,
+      length: double.parse(length),
+      width: double.parse(width),
+      result: double.parse(length) * double.parse(width),
       createdTime: DateTime.now(),
     );
 
