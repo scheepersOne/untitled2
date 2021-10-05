@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class NoteFormWidget extends StatelessWidget {
   final bool? isImportant;
   final int? number;
   final String? title;
   final String? description;
+  final String? length;
+  final String? width;
   final ValueChanged<bool> onChangedImportant;
   final ValueChanged<int> onChangedNumber;
   final ValueChanged<String> onChangedTitle;
   final ValueChanged<String> onChangedDescription;
+  final ValueChanged<String> onChangedLength;
+  final ValueChanged<String> onChangedWidth;
 
   const NoteFormWidget({
     Key? key,
@@ -16,10 +21,14 @@ class NoteFormWidget extends StatelessWidget {
     this.number = 0,
     this.title = '',
     this.description = '',
+    this.length = '',
+    this.width = '',
     required this.onChangedImportant,
     required this.onChangedNumber,
     required this.onChangedTitle,
     required this.onChangedDescription,
+    required this.onChangedLength,
+    required this.onChangedWidth,
   }) : super(key: key);
 
   @override
@@ -50,6 +59,9 @@ class NoteFormWidget extends StatelessWidget {
               SizedBox(height: 8),
               buildDescription(),
               SizedBox(height: 16),
+              buildLength(),
+              SizedBox(height: 8),
+              buildWidth()
             ],
           ),
         ),
@@ -86,5 +98,29 @@ class NoteFormWidget extends StatelessWidget {
             ? 'The description cannot be empty'
             : null,
         onChanged: onChangedDescription,
+      );
+
+  buildLength() => buildDouble(length, 'Length', onChangedLength);
+  buildWidth() => buildDouble(width, 'Width', onChangedWidth);
+
+  Widget buildDouble(String? value, String? hint, ValueChanged<String> onChanged) =>
+      TextFormField(
+        maxLines: 1,
+        initialValue: value,
+        style: TextStyle(color: Colors.white60, fontSize: 18),
+        keyboardType: TextInputType.numberWithOptions(decimal: true , signed: false),
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'(^\d*\.?\d*)'))
+        ],
+      
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: hint,
+          hintStyle: TextStyle(color: Colors.white60),
+        ),
+        validator: (value) => value != null && value.isEmpty
+            ? 'The $hint cannot be empty'
+            : null,
+        onChanged: onChanged,
       );
 }

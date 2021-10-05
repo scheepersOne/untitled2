@@ -3,7 +3,7 @@ final String tableNotes = 'notes';
 class NoteFields {
   static final List<String> values = [
     /// Add all fields
-    id, isImportant, number, title, description, time
+    id, isImportant, number, title, description, length, width, time
   ];
 
   static final String id = '_id';
@@ -11,6 +11,8 @@ class NoteFields {
   static final String number = 'number';
   static final String title = 'title';
   static final String description = 'description';
+  static final String length = 'length';
+  static final String width = 'width';
   static final String time = 'time';
 }
 
@@ -20,6 +22,8 @@ class Note {
   final int number;
   final String title;
   final String description;
+  final double length;
+  final double width;
   final DateTime createdTime;
 
   const Note({
@@ -28,6 +32,8 @@ class Note {
     required this.number,
     required this.title,
     required this.description,
+    required this.length,
+    required this.width,
     required this.createdTime,
   });
 
@@ -37,6 +43,8 @@ class Note {
     int? number,
     String? title,
     String? description,
+    double? length,
+    double? width,
     DateTime? createdTime,
   }) =>
       Note(
@@ -45,6 +53,8 @@ class Note {
         number: number ?? this.number,
         title: title ?? this.title,
         description: description ?? this.description,
+        length: length ?? this.length,
+        width: width ?? this.width,
         createdTime: createdTime ?? this.createdTime,
       );
 
@@ -54,6 +64,8 @@ class Note {
         number: json[NoteFields.number] as int,
         title: json[NoteFields.title] as String,
         description: json[NoteFields.description] as String,
+        length: json[NoteFields.length] as double,
+        width: json[NoteFields.width] as double,
         createdTime: DateTime.parse(json[NoteFields.time] as String),
       );
 
@@ -63,6 +75,8 @@ class Note {
         NoteFields.isImportant: isImportant ? 1 : 0,
         NoteFields.number: number,
         NoteFields.description: description,
+        NoteFields.length: length,
+        NoteFields.width: width,
         NoteFields.time: createdTime.toIso8601String(),
       };
 }

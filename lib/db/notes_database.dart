@@ -28,6 +28,7 @@ class NotesDatabase {
     final textType = 'TEXT NOT NULL';
     final boolType = 'BOOLEAN NOT NULL';
     final integerType = 'INTEGER NOT NULL';
+    final doubleType = 'REAL';
 
     await db.execute('''
 CREATE TABLE $tableNotes ( 
@@ -36,6 +37,8 @@ CREATE TABLE $tableNotes (
   ${NoteFields.number} $integerType,
   ${NoteFields.title} $textType,
   ${NoteFields.description} $textType,
+  ${NoteFields.length} $doubleType,
+  ${NoteFields.width} $doubleType,
   ${NoteFields.time} $textType
   )
 ''');

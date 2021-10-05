@@ -64,7 +64,27 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                     Text(
                       note.description,
                       style: TextStyle(color: Colors.white70, fontSize: 18),
-                    )
+                    ),
+                    SizedBox(height: 8),
+                    if(note.length.toString().isNotEmpty)
+                    Text(
+                      note.length.toString(),
+                      style: TextStyle(color: Colors.white70, fontSize: 18),
+                    ),
+                    SizedBox(height: 8),
+                    if (note.width.toString().isNotEmpty)
+                    Text(
+                      note.width.toString(),
+                      style: TextStyle(color: Colors.white70, fontSize: 18),
+                    ),
+                    SizedBox(height: 8,),
+                    if(note.length.toString().isNotEmpty && note.width.toString().isNotEmpty)
+                    Text(
+                        '${note.length * note.width}',
+                        style: TextStyle(color: Colors.white70, fontSize: 20),
+                      ),
+                
+                    
                   ],
                 ),
               ),
