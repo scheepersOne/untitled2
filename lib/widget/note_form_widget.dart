@@ -101,26 +101,27 @@ class NoteFormWidget extends StatelessWidget {
       );
 
   buildLength() => buildDouble(length, 'Length', onChangedLength);
+
   buildWidth() => buildDouble(width, 'Width', onChangedWidth);
 
-  Widget buildDouble(String? value, String? hint, ValueChanged<String> onChanged) =>
+  Widget buildDouble(
+          String? value, String? hint, ValueChanged<String> onChanged) =>
       TextFormField(
         maxLines: 1,
         initialValue: value,
         style: TextStyle(color: Colors.white60, fontSize: 18),
-        keyboardType: TextInputType.numberWithOptions(decimal: true , signed: false),
+        keyboardType:
+            TextInputType.numberWithOptions(decimal: true, signed: false),
         inputFormatters: [
           FilteringTextInputFormatter.allow(RegExp(r'(^\d*\.?\d*)'))
         ],
-      
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hint,
           hintStyle: TextStyle(color: Colors.white60),
         ),
-        validator: (value) => value != null && value.isEmpty
-            ? 'The $hint cannot be empty'
-            : null,
+        validator: (value) =>
+            value != null && value.isEmpty ? 'The $hint cannot be empty' : null,
         onChanged: onChanged,
       );
 }
