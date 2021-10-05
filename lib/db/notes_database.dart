@@ -39,6 +39,7 @@ CREATE TABLE $tableNotes (
   ${NoteFields.description} $textType,
   ${NoteFields.length} $doubleType,
   ${NoteFields.width} $doubleType,
+  ${NoteFields.result} $doubleType,
   ${NoteFields.time} $textType
   )
 ''');

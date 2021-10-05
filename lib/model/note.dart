@@ -3,7 +3,7 @@ final String tableNotes = 'notes';
 class NoteFields {
   static final List<String> values = [
     /// Add all fields
-    id, isImportant, number, title, description, length, width, time
+    id, isImportant, number, title, description, length, width, result, time
   ];
 
   static final String id = '_id';
@@ -13,6 +13,7 @@ class NoteFields {
   static final String description = 'description';
   static final String length = 'length';
   static final String width = 'width';
+  static final String result = 'result';
   static final String time = 'time';
 }
 
@@ -24,6 +25,7 @@ class Note {
   final String description;
   final double length;
   final double width;
+  final double result;
   final DateTime createdTime;
 
   const Note({
@@ -34,6 +36,7 @@ class Note {
     required this.description,
     required this.length,
     required this.width,
+    required this.result,
     required this.createdTime,
   });
 
@@ -45,6 +48,7 @@ class Note {
     String? description,
     double? length,
     double? width,
+    double? result,
     DateTime? createdTime,
   }) =>
       Note(
@@ -55,6 +59,7 @@ class Note {
         description: description ?? this.description,
         length: length ?? this.length,
         width: width ?? this.width,
+        result: result ?? this.result,
         createdTime: createdTime ?? this.createdTime,
       );
 
@@ -66,6 +71,7 @@ class Note {
         description: json[NoteFields.description] as String,
         length: json[NoteFields.length] as double,
         width: json[NoteFields.width] as double,
+        result: json[NoteFields.result] as double,
         createdTime: DateTime.parse(json[NoteFields.time] as String),
       );
 
@@ -77,6 +83,7 @@ class Note {
         NoteFields.description: description,
         NoteFields.length: length,
         NoteFields.width: width,
+        NoteFields.result: result,
         NoteFields.time: createdTime.toIso8601String(),
       };
 }

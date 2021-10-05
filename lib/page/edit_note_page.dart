@@ -62,7 +62,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       );
 
   Widget buildButton() {
-    final isFormValid = title.isNotEmpty && description.isNotEmpty;
+    final isFormValid = title.isNotEmpty && description.isNotEmpty && length.isNotEmpty && width.isNotEmpty;
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -100,7 +100,8 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       title: title,
       description: description,
       length: double.parse(length),
-      width: double.parse(width)
+      width: double.parse(width),
+      result: double.parse(length) * double.parse(width),
     );
 
     await NotesDatabase.instance.update(note);
@@ -114,6 +115,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       description: description,
       length: double.parse(length),
       width: double.parse(width),
+      result: double.parse(length) * double.parse(width),
       createdTime: DateTime.now(),
     );
 

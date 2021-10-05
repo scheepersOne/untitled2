@@ -36,59 +36,58 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          actions: [editButton(), deleteButton()],
-        ),
-        body: isLoading
-            ? Center(child: CircularProgressIndicator())
-            : Padding(
-                padding: EdgeInsets.all(12),
-                child: ListView(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  children: [
-                    Text(
-                      note.title,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        actions: [editButton(), deleteButton()],
+      ),
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Padding(
+              padding: EdgeInsets.all(12),
+              child: ListView(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                children: [
+                  Text(
+                    note.title,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      DateFormat.yMMMd().format(note.createdTime),
-                      style: TextStyle(color: Colors.white38),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      note.description,
-                      style: TextStyle(color: Colors.white70, fontSize: 18),
-                    ),
-                    SizedBox(height: 8),
-                    if(note.length.toString().isNotEmpty)
-                    Text(
-                      note.length.toString(),
-                      style: TextStyle(color: Colors.white70, fontSize: 18),
-                    ),
-                    SizedBox(height: 8),
-                    if (note.width.toString().isNotEmpty)
-                    Text(
-                      note.width.toString(),
-                      style: TextStyle(color: Colors.white70, fontSize: 18),
-                    ),
-                    SizedBox(height: 8,),
-                    if(note.length.toString().isNotEmpty && note.width.toString().isNotEmpty)
-                    Text(
-                        '${note.length * note.width}',
-                        style: TextStyle(color: Colors.white70, fontSize: 20),
-                      ),
-                
-                    
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    DateFormat.yMMMd().format(note.createdTime),
+                    style: TextStyle(color: Colors.white38),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    note.description,
+                    style: TextStyle(color: Colors.white70, fontSize: 18),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    note.length.toString(),
+                    style: TextStyle(color: Colors.white70, fontSize: 18),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    note.width.toString(),
+                    style: TextStyle(color: Colors.white70, fontSize: 18),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    '${note.result.toStringAsFixed(2)}',
+                    style: TextStyle(color: Colors.white70, fontSize: 20),
+                  )
+                ],
               ),
-      );
+            ),
+    );
+  }
 
   Widget editButton() => IconButton(
       icon: Icon(Icons.edit_outlined),
